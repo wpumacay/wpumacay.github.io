@@ -91,3 +91,43 @@ __global__ void add( int a, int b, int *pRes )
 }
 ```
 
+This part is actually out of main, but it's better to take a look at it now. This is the code that will run in the device. You can ~~see~~ it by the "__global__" keyword. This qualifier tells the compiler to generate device code instead of host code. Here, the compiler sees the bifurcation and does what I mentioned. The CUDA compiler is actually a wrapper on top of the host compiler ( g++, for example ), which transfers the work to the host compiler when needed ( host code ) and transfering it to the CUDA compiler when needed ( device code ).
+
+Appart from the return type, which is void, and the fancy "__global__" keyword, everything is the same as in any c++ function. It has input parameters, which in this case are two integers _a_ and _b_, and a pointer ( to device memory ) _pRes_. In the device code, we just use the variables and pointers the same way we would do in host code. There is no funky method like "cudaUseMemory" or something like that, although there are some special functions that deal with special cases, like "atomicAdd", which we will study later.
+
+```c++
+    // After the computation, get back the result
+    cudaMemcpy( h_res, d_res, sizeof( int ), cudaMemcpyDeviceToHost );
+```
+
+Ok, so far we have requested the device to execute our add kernel, but the result is still in GPU world. We have to bring back that data, as we can dereference it in host code. 
+Here we use another CUDA function, the "cudaMemcpy" function. It acts as a regular memcpy in host code, but the key difference is that it can deal with not only device to device copies, but also with host to device and device to host copies. In our case we want the data back from device memory to host memory, so the direction of copy will be deviceToHost ( like the last parameter in our function call, cudaMemcpyDeviceToHost ).
+
+The parameters that we pass are :
+
+1.  destination pointer, which is to where we want to copy the memory to. In our case is the host pointer _h_res_
+2.  source pointer, which is from where we are going to copy the memory. It's our device pointer _d_res_ in this case.
+3.  amount of memory to copy, which is the size of an int in our case as we are just using a single integer.
+4.  the direction of the copy, which is cudaMemcpyDeviceToHost in our case.
+
+Once completed, we will have the result in the block of memory pointed by _h_res_.
+
+```c++
+    // Print our result
+    std::cout << "2 + 7 = " << *h_res << std::endl;
+```
+
+Here we just print the result. Nothing fancy.
+
+
+```c++
+    // Free the memory on the host
+    free( h_res );
+    // Free the memory on the device ( GPU )
+    cudaFree( d_res );
+```
+
+Finally, once the data has served its purpose, we have to free it. We free the host memory by the call to the usual "free" in host code. We also have to free the memory in the GPU, which is done by the CUDA function "cudaFree". Of course, instead of passing a host pointer, we pass a device pointer.
+
+When the program terminates all the memory used by the GPU is actually released, but we should call cudaFree when the memory is not longer necessary. As an example, imagine that we are dealing with block of memory in the GPU that are related to matrices. Once a matrix is no longer used, we should free its memory, as it could accumulate. Bad things could happen if we run out of memory. Memory leaks are a common issue in host c/c++ code, and they are also a issue in device code.
+
