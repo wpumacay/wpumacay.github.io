@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> 
     </script>
+    {% if jekyll.environment == "development" %}
     <script type="text/javascript" src="http://localhost:4000/assets/libs/pixi.js"></script>
+    {% else %}
+    <script type="text/javascript" src="https://wpumacay.github.io/assets/libs/pixi.js"></script>
+    {% endif %}
 {% seo %}
   </head>
 
