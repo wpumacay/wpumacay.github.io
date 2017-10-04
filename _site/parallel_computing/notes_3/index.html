@@ -5,16 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/css/style.css?v=">
-
 <!-- Begin Jekyll SEO tag v2.2.3 -->
 <title>Gregor, The Coding Cat | A personal blog about CS stuff</title>
 <meta property="og:title" content="Gregor, The Coding Cat" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="A personal blog about CS stuff" />
 <meta property="og:description" content="A personal blog about CS stuff" />
+<link rel="canonical" href="http://localhost:4000/parallel_computing/notes_3/" />
+<meta property="og:url" content="http://localhost:4000/parallel_computing/notes_3/" />
 <meta property="og:site_name" content="Gregor, The Coding Cat" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Gregor, The Coding Cat","description":"A personal blog about CS stuff","url":"/parallel_computing/notes_3/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Gregor, The Coding Cat","description":"A personal blog about CS stuff","url":"http://localhost:4000/parallel_computing/notes_3/"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -29,23 +30,6 @@
         <h2>A personal blog about CS stuff</h2>
 
       </div>
-
-      <!--
-      <div class="wrapper-masthead">
-        <div class="container">
-          <header class="masthead clearfix">
-            <a href="/" class="site-avatar">
-                <img src="" />
-            </a>
-
-            <nav>
-              <a href="/">Home</a>
-              <a href="/cs_stuff">CS stuff</a>
-            </nav>
-          </header>
-        </div>
-      </div>
-      -->
       
     </header>
 
@@ -180,6 +164,29 @@ Here we use another CUDA function, the “cudaMemcpy” function. It acts as a r
 
 <p>When the program terminates all the memory used by the GPU is actually released, but we should call cudaFree when the memory is not longer necessary. As an example, imagine that we are dealing with block of memory in the GPU that are related to matrices. Once a matrix is no longer used, we should free its memory, as it could accumulate. Bad things could happen if we run out of memory. Memory leaks are a common issue in host c/c++ code, and they are also a issue in device code.</p>
 
+<p>To compile our program we just have to call the “nvcc” compiler, like this :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>nvcc -o add.out add.cu
+</code></pre>
+</div>
+
+<p>This will compile our <em>add.cu</em> file and generate the executable <em>add.out</em>. Let’s just run it by calling :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./add.out
+</code></pre>
+</div>
+
+<p>like any other regular executable. Of course, we should get this output :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    2 + 7 = 9
+</code></pre>
+</div>
+
+<p>If you get anything different from 9 it could mean you are not memcopying correctly to the correct pointer. It can also mean that you have no CUDA capable GPU xD, as I did in my laptop which doesn’t. You can actually have the cuda toolkit installed and compile code, but if no GPU is present you wont gen any useful result.</p>
+
+<p>This takes us to talk a little about the device. We have some control over it, but how do we know the resources and limitations of our GPU, or if we have any GPU at all.</p>
+
+<p>We will discuss this in the next section, as this section’s notes are getting quite large. See you there.</p>
 
       </section>
     </div>

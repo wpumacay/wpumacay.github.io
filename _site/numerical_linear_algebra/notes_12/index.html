@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> 
+    </script>
+<!-- Begin Jekyll SEO tag v2.2.3 -->
+<title>Gregor, The Coding Cat | A personal blog about CS stuff</title>
+<meta property="og:title" content="Gregor, The Coding Cat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A personal blog about CS stuff" />
+<meta property="og:description" content="A personal blog about CS stuff" />
+<link rel="canonical" href="http://localhost:4000/numerical_linear_algebra/notes_12/" />
+<meta property="og:url" content="http://localhost:4000/numerical_linear_algebra/notes_12/" />
+<meta property="og:site_name" content="Gregor, The Coding Cat" />
+<script type="application/ld+json">
+{"@context":"http://schema.org","@type":"WebPage","headline":"Gregor, The Coding Cat","description":"A personal blog about CS stuff","url":"http://localhost:4000/numerical_linear_algebra/notes_12/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+
+    <header>
+
+      <div class="container">
+
+        <h1>Gregor, The Coding Cat</h1>
+        <h2>A personal blog about CS stuff</h2>
+
+      </div>
+      
+    </header>
+
+
+    <div class="container">
+      <section id="main_content">
+        <h1 id="-lu-decomposition"><a href="#header-1"></a> LU decomposition</h1>
+
+<p>In this section we will see how to solve a linear system of equations via the LU decomposition/ factorization method, which basically tries to transform a matrix <script type="math/tex">A</script> into a product <script type="math/tex">LU</script>.</p>
+
+<p>First, why should we care about these factorization?. Well, by factorizing the system <script type="math/tex">Ax=b</script> into the system <script type="math/tex">LUx = b</script> we can make the solution process way more simpler.
+We just have to make a two-step process to calculate the solution <script type="math/tex">x</script>. First, solve the system <script type="math/tex">Ly = b</script>, which is simpler because the <script type="math/tex">L</script> matrix is lower triangular, which is equivalent to applying a kind of backsubstitution, like we did in the final step of gaussian elimination. Then we end up with a system <script type="math/tex">Ux = y</script>, which we solve by direct backsubstitution, which is also simple.</p>
+
+<p>Now, the problem is how to find this factorization, which is what we are going to study in this section and the next.</p>
+
+<p>The first approach is by using elementary matrices, which make the process quite similar to gaussian elimination. What we aim is to change the matrix <script type="math/tex">A</script> iteratively by making zeros below the main diagonal, thus converting the matrix <script type="math/tex">A</script> into an upper triangular matrix. So, let’s check the primitive, namely elementary matrices.</p>
+
+<h3 id="elementary-matrices">Elementary matrices</h3>
+
+<p>These matrices are some special kind of matrices that we will use to make zeros in our target matrix. They have the form of a identity matrix, with the exception that they have some non-zero elements below the diagonal in a certain column, like the following matrix.</p>
+
+<p>\[ 
+	\begin{bmatrix}
+		1 	&amp; 	0 	&amp; 	0 	 	&amp; 	0 	&amp; 	0 \\
+		0 	&amp; 	1 	&amp; 	0 	 	&amp; 	0	&amp; 	0 \\
+		0 	&amp; 	0 	&amp; 	1 	 	&amp; 	0 	&amp; 	0 \\
+		0 	&amp; 	0 	&amp; 	m_{4,3} &amp; 	1 	&amp; 	0 \\
+		0 	&amp; 	0 	&amp; 	m_{5,3} &amp; 	0 	&amp;  	1
+	\end{bmatrix}
+\]</p>
+
+<p>As we see, these matrix is essentially an identity matrix, but with zeros below the diagonal element in the 3rd column.</p>
+
+<p>More generally, a lower elementary matrix can be defined as follows :</p>
+
+<p>\[
+	E = I_{k} + m_{k} e_{k}^{T}
+\]</p>
+
+<p>Where <script type="math/tex">e_{k}</script> is the kth vector of the canonical base in <script type="math/tex">R^{n}</script>, which is like ( for example, <script type="math/tex">e_{2}</script> in <script type="math/tex">R^{5}</script> ) :</p>
+
+<p>\[
+	e_{2} = 
+	\begin{bmatrix}
+		0 \\ 1 \\ 0 \\ 0 \\ 0
+	\end{bmatrix}
+\]</p>
+
+<p>The vector <script type="math/tex">m_{k}</script> is a special kind of column vector in <script type="math/tex">R^{n}</script>, which has all elements zero from the first to the kth element, like this ( for <script type="math/tex">m_{3}</script> in <script type="math/tex">R^{5}</script>):</p>
+
+<p>\[
+	m_{k} = 
+	\begin{bmatrix}
+		0 \\ 0 \\ 0 \\ m_{4} \\ m_{5}
+	\end{bmatrix}
+\]</p>
+
+<p>The matrix above was actually formed by <script type="math/tex">E = I_{5} + m_{3} e_{3}^{T}</script>, which I recommend checking out by computing it.</p>
+
+<p>As we can see, an elementary matrix is formed by its <script type="math/tex">m_{k}</script> vector of elements, which in the case of the <script type="math/tex">LU</script> factorization is known as vector of <strong>multipliers</strong>.</p>
+
+<p>Let’s see how to compute the <script type="math/tex">LU</script> factorization by using these elementary matrices.</p>
+
+<h3 id="lu-factorization-using-elementary-matrices">LU factorization using elementary matrices</h3>
+
+<p>This process is similar to Gaussian Elimination. What we want is to make zeros below the elements of the diagonal to get a resulting upper triangular system.</p>
+
+<p>Unlike Gaussian elimination, we also need to compute a lower triangular matrix <script type="math/tex">L</script> which at first sight seems like a completely different approach. The key is to note that while executing Gaussian elimination, we are actually computing some elements that are part of the lower triangular matrix that we want. These elements are the multipliers that we use in order to make zeros below the diagonal. These multipliers are the actual ones we are going to use to compute our elementary matrices.</p>
+
+<p>Recall that an elementary matrix is defined by its vector <script type="math/tex">m_{k}</script>, which in the context of LU factorization is actually the vector of multipliers in the kth iteration of the gaussian elimination process.</p>
+
+<p>Once we have these multipliers, we can form an elementary matrix such that, if multiplies the matrix <script type="math/tex">A</script> to the left will make zeros below the kth diagonal element in the kth column.</p>
+
+<p>Ok, ok, sorry for too many words, let’s see a concrete example of how to form these matrices.</p>
+
+<p>Let’s use the following matrix :</p>
+
+<p>\[
+	A = 
+	\begin{bmatrix}
+		2	&amp;	2	&amp;	3 \\
+		4	&amp;	5	&amp;	6 \\
+		1	&amp;	2	&amp;	4
+	\end{bmatrix}
+\]</p>
+
+      </section>
+    </div>
+
+  </body>
+</html>

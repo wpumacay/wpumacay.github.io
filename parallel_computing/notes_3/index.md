@@ -131,3 +131,26 @@ Finally, once the data has served its purpose, we have to free it. We free the h
 
 When the program terminates all the memory used by the GPU is actually released, but we should call cudaFree when the memory is not longer necessary. As an example, imagine that we are dealing with block of memory in the GPU that are related to matrices. Once a matrix is no longer used, we should free its memory, as it could accumulate. Bad things could happen if we run out of memory. Memory leaks are a common issue in host c/c++ code, and they are also a issue in device code.
 
+To compile our program we just have to call the "nvcc" compiler, like this :
+
+```
+nvcc -o add.out add.cu
+```
+
+This will compile our _add.cu_ file and generate the executable _add.out_. Let's just run it by calling :
+
+```
+./add.out
+```
+
+like any other regular executable. Of course, we should get this output :
+
+```
+    2 + 7 = 9
+```
+
+If you get anything different from 9 it could mean you are not memcopying correctly to the correct pointer. It can also mean that you have no CUDA capable GPU xD, as I did in my laptop which doesn't. You can actually have the cuda toolkit installed and compile code, but if no GPU is present you wont gen any useful result.
+
+This takes us to talk a little about the device. We have some control over it, but how do we know the resources and limitations of our GPU, or if we have any GPU at all.
+
+We will discuss this in the next section, as this section's notes are getting quite large. See you there.

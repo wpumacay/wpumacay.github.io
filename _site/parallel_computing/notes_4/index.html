@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+<!-- Begin Jekyll SEO tag v2.2.3 -->
+<title>Gregor, The Coding Cat | A personal blog about CS stuff</title>
+<meta property="og:title" content="Gregor, The Coding Cat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A personal blog about CS stuff" />
+<meta property="og:description" content="A personal blog about CS stuff" />
+<link rel="canonical" href="http://localhost:4000/parallel_computing/notes_4/" />
+<meta property="og:url" content="http://localhost:4000/parallel_computing/notes_4/" />
+<meta property="og:site_name" content="Gregor, The Coding Cat" />
+<script type="application/ld+json">
+{"@context":"http://schema.org","@type":"WebPage","headline":"Gregor, The Coding Cat","description":"A personal blog about CS stuff","url":"http://localhost:4000/parallel_computing/notes_4/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+
+    <header>
+
+      <div class="container">
+
+        <h1>Gregor, The Coding Cat</h1>
+        <h2>A personal blog about CS stuff</h2>
+
+      </div>
+      
+    </header>
+
+
+    <div class="container">
+      <section id="main_content">
+        <h2 id="device-properties">Device properties</h2>
+
+<p>TODO</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// LCommon.h
+// Declarations of some helper functions
+</span><span class="cp">#pragma once
+</span>
+<span class="cp">#include &lt;iostream&gt;
+</span>
+<span class="cp">#include &lt;cuda.h&gt;
+#include &lt;cuda_runtime.h&gt;
+</span>
+
+<span class="k">namespace</span> <span class="n">common</span>
+<span class="p">{</span>
+
+    <span class="kt">void</span> <span class="n">printDeviceProps</span><span class="p">(</span> <span class="kt">int</span> <span class="n">deviceId</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="p">);</span>
+
+    <span class="kt">void</span> <span class="n">checkError</span><span class="p">(</span> <span class="n">cudaError_t</span> <span class="n">pErrorCode</span> <span class="p">);</span>
+
+<span class="p">}</span>
+
+
+
+</code></pre>
+</div>
+
+<p>TODO</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>
+<span class="cp">#include "LCommon.h"
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="n">common</span>
+<span class="p">{</span>
+
+
+    <span class="kt">void</span> <span class="n">printDeviceProps</span><span class="p">(</span> <span class="kt">int</span> <span class="n">deviceId</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">deviceId</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">_devCount</span><span class="p">;</span>
+            <span class="c1">// Check all devices
+</span>            <span class="n">checkError</span><span class="p">(</span> <span class="n">cudaGetDeviceCount</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">_devCount</span> <span class="p">)</span> <span class="p">);</span>
+
+            <span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">q</span> <span class="o">&lt;</span> <span class="n">_devCount</span><span class="p">;</span> <span class="n">q</span><span class="o">++</span> <span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">printDeviceProps</span><span class="p">(</span> <span class="n">q</span> <span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">cudaDeviceProp</span> <span class="n">_props</span><span class="p">;</span>
+
+            <span class="n">checkError</span><span class="p">(</span> <span class="n">cudaGetDeviceProperties</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">_props</span><span class="p">,</span> <span class="n">deviceId</span> <span class="p">)</span> <span class="p">);</span>
+
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">" --- General information for device "</span> <span class="o">&lt;&lt;</span> <span class="n">deviceId</span> <span class="o">&lt;&lt;</span> <span class="s">" ---"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Name: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Compute capability: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">major</span> <span class="o">&lt;&lt;</span> <span class="s">"."</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">minor</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Clock rate: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">clockRate</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Device copy overlap: "</span> <span class="o">&lt;&lt;</span> <span class="p">(</span> <span class="p">(</span> <span class="n">_props</span><span class="p">.</span><span class="n">deviceOverlap</span> <span class="p">)</span> <span class="o">?</span> <span class="s">"Enabled"</span> <span class="o">:</span> <span class="s">"Disabled"</span> <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Kernel execution timeout: "</span> <span class="o">&lt;&lt;</span> <span class="p">(</span> <span class="p">(</span> <span class="n">_props</span><span class="p">.</span><span class="n">kernelExecTimeoutEnabled</span> <span class="p">)</span> <span class="o">?</span> <span class="s">"Enabled"</span> <span class="o">:</span> <span class="s">"Disabled"</span> <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">" --- Memory information for device "</span> <span class="o">&lt;&lt;</span> <span class="n">deviceId</span> <span class="o">&lt;&lt;</span> <span class="s">" ---"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Total global memory: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">totalGlobalMem</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Total constant memory: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">totalConstMem</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Max mem pitch: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">memPitch</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Texture Alignment: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">textureAlignment</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">" --- Multiprocessor information for device "</span> <span class="o">&lt;&lt;</span> <span class="n">deviceId</span> <span class="o">&lt;&lt;</span> <span class="s">" ---"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Num multiprocessors: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">multiProcessorCount</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Shared memory per multiprocessor: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">sharedMemPerBlock</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Registers per multiprocessor: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">regsPerBlock</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Threads in warp: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">warpSize</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Max threads per block: "</span> <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">maxThreadsPerBlock</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Max thread dimensions: "</span> <span class="o">&lt;&lt;</span> <span class="s">"( "</span> 
+                    <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">maxThreadsDim</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" - "</span>
+                    <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">maxThreadsDim</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" - "</span>
+                    <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">maxThreadsDim</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" ) "</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Max grid dimensions: "</span> <span class="o">&lt;&lt;</span> <span class="s">"( "</span> 
+                    <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">maxGridSize</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" - "</span>
+                    <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">maxGridSize</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" - "</span>
+                    <span class="o">&lt;&lt;</span> <span class="n">_props</span><span class="p">.</span><span class="n">maxGridSize</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" ) "</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">" ------------------------------------------------------------ "</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+
+    <span class="kt">void</span> <span class="n">checkError</span><span class="p">(</span> <span class="n">cudaError_t</span> <span class="n">pErrorCode</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">pErrorCode</span> <span class="o">!=</span> <span class="n">cudaSuccess</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Error: "</span> <span class="o">&lt;&lt;</span> <span class="n">__FILE__</span> <span class="o">&lt;&lt;</span> <span class="s">" - "</span> <span class="o">&lt;&lt;</span> <span class="n">__LINE__</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Code: "</span> <span class="o">&lt;&lt;</span> <span class="n">pErrorCode</span> <span class="o">&lt;&lt;</span> <span class="s">" - reason: "</span> <span class="o">&lt;&lt;</span> <span class="n">cudaGetErrorString</span><span class="p">(</span> <span class="n">pErrorCode</span> <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+            <span class="n">exit</span><span class="p">(</span> <span class="mi">1</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p>TODO</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="cp">#include "helpers/LCommon.h"
+</span>
+<span class="cp">#include &lt;iostream&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"checking properties ..."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+    <span class="n">common</span><span class="o">::</span><span class="n">printDeviceProps</span><span class="p">();</span>
+
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"done"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>TODO</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>nvcc -o test_device.out test_device.cu helpers/LCommon.cpp
+
+</code></pre>
+</div>
+
+<p>TODO</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./test_device.out
+
+checking properties ...
+ --- General information for device 0 ---
+Name: GeForce GTX 750 TiCompute capability: 5.0
+Clock rate: 1254500
+Device copy overlap: Enabled
+Kernel execution timeout: Disabled
+ --- Memory information for device 0 ---
+Total global memory: 2096431104
+Total constant memory: 65536
+Max mem pitch: 2147483647
+Texture Alignment: 512
+ --- Multiprocessor information for device 0 ---
+Num multiprocessors: 5
+Shared memory per multiprocessor: 49152
+Registers per multiprocessor: 65536
+Threads in warp: 32
+Max threads per block: 1024
+Max thread dimensions: ( 1024 - 1024 - 64 ) 
+Max grid dimensions: ( 2147483647 - 65535 - 65535 ) 
+ ------------------------------------------------------------ 
+done
+
+</code></pre>
+</div>
+
+<p>TODO</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./test_device.out 
+
+checking properties ...
+Error: helpers/LCommon.cpp - 66
+Code: 35 - reason: CUDA driver version is insufficient for CUDA runtime version
+</code></pre>
+</div>
+
+      </section>
+    </div>
+
+  </body>
+</html>

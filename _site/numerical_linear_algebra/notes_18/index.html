@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> 
+    </script>
+<!-- Begin Jekyll SEO tag v2.2.3 -->
+<title>Gregor, The Coding Cat | A personal blog about CS stuff</title>
+<meta property="og:title" content="Gregor, The Coding Cat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A personal blog about CS stuff" />
+<meta property="og:description" content="A personal blog about CS stuff" />
+<link rel="canonical" href="http://localhost:4000/numerical_linear_algebra/notes_18/" />
+<meta property="og:url" content="http://localhost:4000/numerical_linear_algebra/notes_18/" />
+<meta property="og:site_name" content="Gregor, The Coding Cat" />
+<script type="application/ld+json">
+{"@context":"http://schema.org","@type":"WebPage","headline":"Gregor, The Coding Cat","description":"A personal blog about CS stuff","url":"http://localhost:4000/numerical_linear_algebra/notes_18/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+
+    <header>
+
+      <div class="container">
+
+        <h1>Gregor, The Coding Cat</h1>
+        <h2>A personal blog about CS stuff</h2>
+
+      </div>
+      
+    </header>
+
+
+    <div class="container">
+      <section id="main_content">
+        <h1 id="jacobi-and-gauss-seidel-methods">Jacobi and Gauss Seidel methods</h1>
+
+<p>In this section we will start studying iterative methods for solving systems of linear equations.</p>
+
+<p>Contrary to direct methods, iterative methods do not find the exact solution in an exact number of steps ( note: exception being the conjugate gradient method ), but instead in an infinite number of steps. What we want is usually a good enough aproximation of the exact solution, which can be obtained in some iterations.</p>
+
+<p>The advantage of iterative methods over direct ones is that they deal better with sparse systems, being special iterative methods that can deal with these systems and compute a solution efficiently and with less computation than direct methods.</p>
+
+<h3 id="iterative-step">Iterative step</h3>
+
+<p>The general iterative step to calculate a solution for the system <script type="math/tex">Ax=b</script> is as follows :</p>
+
+<p>\[
+	x^{(k+1)} = B x^{(k)} + f
+\]</p>
+
+<p>With <em>B</em> and <em>f</em> calculated from <em>A</em> and <em>b</em>, usually by partitioning the matrix <em>A</em>.</p>
+
+<p>Of course, these iterative step has to be derived from the original system and yield the solution of this system, not any other system. That’s why, when the system converges, <script type="math/tex">x^{(k+1)}</script> should be the same as <script type="math/tex">x^{(k)}</script>. It’s like a kind of “steady state” solution.</p>
+
+<p>This solution should also be equal to <script type="math/tex">A^{-1}b</script>, so by comparing the iterative step in the steady state, and the exact solution, we can get the following :</p>
+
+<p>\[
+	x = B x + f \\
+	\rightarrow 
+	(I - B)x = f \\
+	\rightarrow
+	(I - B)A^{-1}b = f \\
+\]</p>
+
+<p>So we say that a system is consistent ( if converges, converges to the solution of our system ) if satisfies this:</p>
+
+<p>\[
+	f = (I - B)A^{-1}b
+\]</p>
+
+<p>Of course, consistency does not suffice to guarantee convergence for any initial guess, which is what we aim for.</p>
+
+<p>We will talk about the convergence of an iterative method in the next sections. For now, rest assure that there are checks that we can do to ensure that our iterative method will converge to the exact solution for any initial guess.</p>
+
+<h3 id="jacobi-method">Jacobi method</h3>
+
+<p>As mentioned earlier, we can obtain the matrix <em>B</em> by splitting the matrix <em>A</em>. According to the splitting, we get different methods, being the Jacobi method the one corresponding to the splitting of the matrix in the following form :</p>
+
+<p>\[
+	A = D + ( L + U ) = D + “LU”
+\]</p>
+
+<p>Where we split the matrix <em>A</em> into <em>D</em> (diagonal part of <em>A</em>) and <em>( L + U )</em> ( non diagonal part of <em>A</em> ). This gives us the following iterative method.</p>
+
+<p>\[
+	\textbf{ Jacobi iteration } \\
+	x^{k+1} = B_{J} x^{k} + b_{J} \\
+	B_{J} = -D^{-1}( L + U ) \\
+	b_{J} = D^{-1}b
+\]</p>
+
+<p>You can check that these relations are satisfied. Just apply the splitting and work your way to the general iterative step form, and you will find out these relations.</p>
+
+<p>A more compute-friendly expression can be obtained, if you don’t want to code the matrix multiplications and generate these iterative matrices at all. Let’s just start with the standard form :</p>
+
+<p>\[
+	x^{k+1} = B_{J} x^{k} + b_{J} = -D^{-1}( L + U )x^{k} + D^{-1}b
+\]</p>
+
+<p>If we factorize <script type="math/tex">D^{-1}</script> in the right hand side, we get :</p>
+
+<p>\[
+	x^{k+1} = D^{-1}( b - ( L + U )x^{k} )
+\]</p>
+
+<p>If we focus in the <em>ith</em> element of the vector <script type="math/tex">x^{k+1}</script> we can get the following expresion :</p>
+
+<p>\[
+	x_{i}^{(k+1)} = \frac{1}{a_{ii}} ( b_{i} - \sum_{j \neq i} a_{ij} x_{j}^{(k)} )
+\]</p>
+
+<p>Which can be implemented without the need of computing the corresponding matrix and vector of the iterative step. Also if you don’t have a matrix library at your disposal :D .</p>
+
+<h3 id="worked-example-on-the-jacobi-method">Worked example on the Jacobi method</h3>
+
+<p>TODO: Write an example</p>
+
+<h3 id="matlab-python-and-cc-implementation">MATLAB, Python and C/C++ implementation</h3>
+
+<p>TODO: Write the implementation for the appropiate cases, or maybe make another section in which you deal
+with implementation details.</p>
+
+<h3 id="gauss-seidel-method">Gauss Seidel method</h3>
+
+<p>The Gauss Seidel method is obtained by the following splitting :</p>
+
+<p>\[
+	A = ( D + L ) + U = “DL” + U
+\]</p>
+
+<p>Now the preconditioning matrix <em>P</em> is $( D + L )$, and the iterative step can be expressed as follows :</p>
+
+<p>\[
+	\textbf{ Gauss Seidel iteration } \\
+	x^{k+1} = B_{GS} x^{k} + b_{GS} \\
+	B_{GS} = -( D + L )^{-1} U \\
+	b_{GS} = ( D + L )^{-1}b
+\]</p>
+
+<p>Again, by working with the expressions,</p>
+
+      </section>
+    </div>
+
+  </body>
+</html>

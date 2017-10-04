@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+<!-- Begin Jekyll SEO tag v2.2.3 -->
+<title>Gregor, The Coding Cat | A personal blog about CS stuff</title>
+<meta property="og:title" content="Gregor, The Coding Cat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A personal blog about CS stuff" />
+<meta property="og:description" content="A personal blog about CS stuff" />
+<link rel="canonical" href="http://localhost:4000/parallel_computing/notes_summary/" />
+<meta property="og:url" content="http://localhost:4000/parallel_computing/notes_summary/" />
+<meta property="og:site_name" content="Gregor, The Coding Cat" />
+<script type="application/ld+json">
+{"@context":"http://schema.org","@type":"WebPage","headline":"Gregor, The Coding Cat","description":"A personal blog about CS stuff","url":"http://localhost:4000/parallel_computing/notes_summary/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+
+    <header>
+
+      <div class="container">
+
+        <h1>Gregor, The Coding Cat</h1>
+        <h2>A personal blog about CS stuff</h2>
+
+      </div>
+      
+    </header>
+
+
+    <div class="container">
+      <section id="main_content">
+        <h1 id="-summary"><a href="#header-1"></a> Summary</h1>
+
+<p>This section will try to summarize the notes covered in each section. It was actually an attempt to review some
+concepts for an exam I had to take. Hope it’s useful for you.</p>
+
+<h2 id="cuda-memory-overview">CUDA Memory overview</h2>
+
+<p>So, there are some key ideas we have to remember about memory in CUDA, and those are:</p>
+
+<ol>
+  <li>Global memory</li>
+  <li>Shared memory</li>
+  <li>Local memory</li>
+  <li>Constant memory</li>
+  <li>Texture memory</li>
+  <li>Pinned memory ( page-locked )</li>
+  <li>Zero-copy memory ( a variant of pinned memory )</li>
+</ol>
+
+<p>Let’s go over them one by one.</p>
+
+<h2 id="global-memory">Global memory</h2>
+
+<p>This is the big chunk of memory that you have available for computations. You 
+usually deal with it when doing cudaMallocs and cudaMemcpys. This memory resides in DDR RAM 
+that resides in the device, but not in the GPU-chip itself. There are huge amounts of this memory
+compared with the other types ( in the order of GBs ). To find out how much, just query the
+properties of your device. This is the base memory we use, and is usually the slower, by more or less
+two orders of magnitude compared with its cached counterpart Shared memory, and local registers.</p>
+
+<p>All cudaMemcpys basically store data into this block of memory, and as you recall, you define pointers in
+host code to deal with the cuda calls to handle this memory.</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="kt">float</span><span class="o">*</span> <span class="n">d_vec</span><span class="p">;</span>
+    <span class="n">cudaMalloc</span><span class="p">(</span> <span class="p">(</span> <span class="kt">void</span><span class="o">**</span> <span class="p">)</span><span class="o">&amp;</span><span class="n">d_vec</span><span class="p">,</span> <span class="n">size</span> <span class="p">);</span>
+    <span class="n">cudaMemcpy</span><span class="p">(</span> <span class="n">d_vec</span><span class="p">,</span> <span class="n">someHostData</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">cudaMemcpyHostToDevice</span> <span class="p">);</span>
+</code></pre>
+</div>
+
+<p>It’s usually when dealing with this memory that we have the issue of potentially dereferencing the pointers
+created for the global memory allocated in GPU in host code. 
+Also, Pinned and Zero-copy memory are actual blocks of global memory, with some extra functionality, and texture
+memory resides actually in global memory but has some other features.</p>
+
+<h2 id="shared-memory">Shared memory</h2>
+
+<p>This is basically the local memory that can be used by working threads in the same block. If you recall some of the architecture 
+of a CUDA GPU, it’s composed of lots of CUDA cores that are arranged in groups calles Streaming Multiprocessors ( SMs ). This are
+collections of physical compute cores and basically the blocks have to be scheduled in such a way that they fit into an SM. It’s in
+this SM that we have a cache-like memory that we can use to share data between working threads in a same SM.</p>
+
+<p>This memory is quite fast, faster that global memory by a factor of approx. 100 times, but sure it limited in size. If you query your
+device you will see that you have just some dozens of KBs available for each SM.</p>
+
+<p>To work with this kind of memory, we declare it inside device code, as opposed to global memory, which is declared and reserved in host code.</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">__shared__</span> <span class="kt">float</span> <span class="n">sh_foo</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+</code></pre>
+</div>
+
+<p>The amount of memory has to be know at compile time if declared in this way. It could be dynamic if we pass the amount of memory in the kernel call.</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">fooKernel</span><span class="o">&lt;&lt;&lt;</span> <span class="n">grid</span><span class="p">,</span> <span class="n">block</span><span class="p">,</span> <span class="n">sizeOfSharedMemory</span> <span class="o">&gt;&gt;&gt;</span><span class="p">(</span> <span class="n">args</span> <span class="p">)</span>
+</code></pre>
+</div>
+
+<p>In this context we have to deal with synchronization calls, like __syncthreads(), which need to be called in order for the threads in a block to
+synchronize its execution ( wait till all have reached that section ).</p>
+
+<h2 id="local-memory">Local memory</h2>
+
+<p>This is the memory used to store registers or local primitive variables, like floats, ints, etc. inside device code. It’s faster that global memory
+more or less in the same order of magnitude as shared memory.</p>
+
+<h2 id="constant-memory">Constant memory</h2>
+
+<p>This is a special kind of global memory. When we declare some region as <strong>constant</strong>, we ask the compiler to treat this region as read-only. This
+has some advantages, as the memory can be cached efficiently because wont change, and also less read requests within a same half-warp ( more on warps in some sections )
+by using a single read and then a broadcast, reducing the memory transfers by a good order of magnitude.</p>
+
+<p>To define a region as constant we declare like this</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">__constant__</span> <span class="kt">float</span> <span class="n">foo</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
+</code></pre>
+</div>
+
+<p>To actually fill this region, we use <em>cudaMemcpyToSymbol</em> instead of a normal <em>cudaMemcpy</em>.</p>
+
+<h2 id="texture-memory">Texture memory</h2>
+
+<p>This is memory similar to constant memory, in the sense that is read-only, but it actually resides on global memory. The way it improves is that is
+accessed by a special read-only data line and it can also be cached. To use or not to use it depends of the problem form. Problems that can take advantage of
+texture memory are the ones that do computation in regions close to each other in a 2D space, to name an example.</p>
+
+<p>To create and use it we have to first define a texture object</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">texture</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">myTexture</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>Then bind it to a region already allocated with cudaMalloc</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">cudaBindTexture</span><span class="p">(</span> <span class="p">...</span> <span class="p">);</span>
+</code></pre>
+</div>
+
+<p>And then we can use it in our kernel code by using tex2Dfetch or tex1Dfetch, according to the dimension of our texture.</p>
+
+<h2 id="pinned-memory">Pinned memory</h2>
+
+<p>This is a special kind of global memory in the sense that it won’t be paged and sent to the swap region ( virtual memory on disk ) of our computer. Instead, it
+is force to remain in RAM always.</p>
+
+<h2 id="streams">Streams</h2>
+
+
+      </section>
+    </div>
+
+  </body>
+</html>
