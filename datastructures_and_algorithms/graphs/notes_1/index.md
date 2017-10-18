@@ -6,4 +6,18 @@ layout: notes_interactive_2d
 
 In this section we will see some data structures we can use to implement graphs.
 
-{% include container_2d.html %}
+### Adjacency matrix
+
+fun foo
+
+{% include container_2d_graphs_adj_mat.html %}
+
+foo bar
+
+### Adjacency list
+
+fun foo
+
+{% include container_2d_graphs_adj_list.html %}
+
+foo bar
