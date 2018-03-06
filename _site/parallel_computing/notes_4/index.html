@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/css/style.css?v=">
-<!-- Begin Jekyll SEO tag v2.2.3 -->
+<!-- Begin Jekyll SEO tag v2.4.0 -->
 <title>Gregor, The Coding Cat | A personal blog about CS stuff</title>
+<meta name="generator" content="Jekyll v3.7.3" />
 <meta property="og:title" content="Gregor, The Coding Cat" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="A personal blog about CS stuff" />
@@ -15,7 +16,7 @@
 <meta property="og:url" content="http://localhost:4000/parallel_computing/notes_4/" />
 <meta property="og:site_name" content="Gregor, The Coding Cat" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Gregor, The Coding Cat","description":"A personal blog about CS stuff","url":"http://localhost:4000/parallel_computing/notes_4/"}</script>
+{"description":"A personal blog about CS stuff","@type":"WebPage","url":"http://localhost:4000/parallel_computing/notes_4/","headline":"Gregor, The Coding Cat","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -40,9 +41,9 @@
 
 <p>TODO</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// LCommon.h
-// Declarations of some helper functions
-</span><span class="cp">#pragma once
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// LCommon.h</span>
+<span class="c1">// Declarations of some helper functions</span>
+<span class="cp">#pragma once
 </span>
 <span class="cp">#include &lt;iostream&gt;
 </span>
@@ -61,12 +62,11 @@
 
 
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>TODO</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="cp">#include "LCommon.h"
 </span>
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
@@ -80,8 +80,8 @@
         <span class="k">if</span> <span class="p">(</span> <span class="n">deviceId</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span>
         <span class="p">{</span>
             <span class="kt">int</span> <span class="n">_devCount</span><span class="p">;</span>
-            <span class="c1">// Check all devices
-</span>            <span class="n">checkError</span><span class="p">(</span> <span class="n">cudaGetDeviceCount</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">_devCount</span> <span class="p">)</span> <span class="p">);</span>
+            <span class="c1">// Check all devices</span>
+            <span class="n">checkError</span><span class="p">(</span> <span class="n">cudaGetDeviceCount</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">_devCount</span> <span class="p">)</span> <span class="p">);</span>
 
             <span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">q</span> <span class="o">&lt;</span> <span class="n">_devCount</span><span class="p">;</span> <span class="n">q</span><span class="o">++</span> <span class="p">)</span>
             <span class="p">{</span>
@@ -141,12 +141,11 @@
 
 <span class="p">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>TODO</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="cp">#include "helpers/LCommon.h"
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "helpers/LCommon.h"
 </span>
 <span class="cp">#include &lt;iostream&gt;
 </span>
@@ -163,19 +162,17 @@
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>TODO</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>nvcc -o test_device.out test_device.cu helpers/LCommon.cpp
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvcc -o test_device.out test_device.cu helpers/LCommon.cpp
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>TODO</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./test_device.out
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./test_device.out
 
 checking properties ...
  --- General information for device 0 ---
@@ -199,18 +196,16 @@ Max grid dimensions: ( 2147483647 - 65535 - 65535 )
  ------------------------------------------------------------ 
 done
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>TODO</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./test_device.out 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./test_device.out 
 
 checking properties ...
 Error: helpers/LCommon.cpp - 66
 Code: 35 - reason: CUDA driver version is insufficient for CUDA runtime version
-</code></pre>
-</div>
+</code></pre></div></div>
 
       </section>
     </div>

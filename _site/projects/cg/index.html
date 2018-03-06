@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+<!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Gregor, The Coding Cat | A personal blog about CS stuff</title>
+<meta name="generator" content="Jekyll v3.7.3" />
+<meta property="og:title" content="Gregor, The Coding Cat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A personal blog about CS stuff" />
+<meta property="og:description" content="A personal blog about CS stuff" />
+<link rel="canonical" href="http://localhost:4000/projects/cg/" />
+<meta property="og:url" content="http://localhost:4000/projects/cg/" />
+<meta property="og:site_name" content="Gregor, The Coding Cat" />
+<script type="application/ld+json">
+{"description":"A personal blog about CS stuff","@type":"WebPage","url":"http://localhost:4000/projects/cg/","headline":"Gregor, The Coding Cat","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+
+    <header>
+
+      <div class="container">
+
+        <h1>Gregor, The Coding Cat</h1>
+        <h2>Projects</h2>
+
+      </div>
+      
+    </header>
+
+
+    <div class="container">
+      <section id="main_content">
+        <h1 id="on-the-architecture-and-implementation-of-a-simulation-engine-for-research-in-locomotion">On the Architecture and Implementation of a simulation engine for research in locomotion.</h1>
+
+<h4 id="image-here">Image here!!!!</h4>
+
+<h2 id="intro">Intro</h2>
+
+<p>This project focuses in the implementation from the ground-up of a simulation engine, based on the work done by <a href="https://www.cs.ubc.ca/~van/">Michiel van de Panne</a> and its group at the University of British Columbia; in specific, the project <a href="https://xbpeng.github.io/projects/DeepTerrainRL/index.html"><strong>Terrain-Adaptive Locomotion Skills Using Deep Reinforcement Learning</strong></a>, by <a href="https://xbpeng.github.io/">Xue Bin Peng</a>.</p>
+
+<p>We designed the architecture of the modules to be used for this simulator with the aim to reproduce the results of the project mentioned before, as well as use the resulting engine for some other research purposes.</p>
+
+<h2 id="about-the-reference-project">About the reference project</h2>
+
+<p>As described earlier, we based our project on the <strong>Terrain-Adaptive Locomotion Skill Using Deep Reinforcement Learning</strong>. This paper focuses on training controllers using Deep Reinforcement Learning in order to achieve locomotion for simulated characters. The project consists of a simulation engine built by the authors, which they used in several projects related to locomotion, like <a href="https://xbpeng.github.io/projects/TerrainRL/index.html">this</a>, <a href="https://xbpeng.github.io/projects/TerrainRL/index.html">this</a>, and more recently <a href="https://xbpeng.github.io/projects/ActionSpace/index.html">this</a>.</p>
+
+<p>Below you can see their provided github demo.</p>
+
+<h4 id="image-here-1">Image here!!!!</h4>
+
+<h2 id="architectural-design">Architectural design</h2>
+
+<p>There are three main modules implemented for this project, which are :</p>
+
+<ul>
+  <li><strong>Graphics Engine</strong> : To render the simulated scene.</li>
+  <li><strong>Physics wrapper</strong> : To interface with the Bullet3 physics engine.</li>
+  <li><strong>Controller wrapper</strong> : To interface with the project’s controllers code.</li>
+</ul>
+
+<h3 id="graphics-engine">Graphics Engine</h3>
+
+<p>A graphics engine is needed to render the simulated scene. The original project uses the old OpenGL’s rendering pipeline in a inmediate render mode, by means of glBegin and glEnd.</p>
+
+<p>We implemented a basic rendering engine to handle the rendering process using the modern OpenGL pipeline ( OpenGL 3 and GLSL 330 core ).</p>
+
+<p>In this stage we have to abstract the functionality of the OpenGL pipeline to be able to use it easily, as well as implementing features like</p>
+
+      </section>
+    </div>
+
+  </body>
+</html>

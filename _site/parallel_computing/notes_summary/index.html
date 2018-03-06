@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/css/style.css?v=">
-<!-- Begin Jekyll SEO tag v2.2.3 -->
+<!-- Begin Jekyll SEO tag v2.4.0 -->
 <title>Gregor, The Coding Cat | A personal blog about CS stuff</title>
+<meta name="generator" content="Jekyll v3.7.3" />
 <meta property="og:title" content="Gregor, The Coding Cat" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="A personal blog about CS stuff" />
@@ -15,7 +16,7 @@
 <meta property="og:url" content="http://localhost:4000/parallel_computing/notes_summary/" />
 <meta property="og:site_name" content="Gregor, The Coding Cat" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Gregor, The Coding Cat","description":"A personal blog about CS stuff","url":"http://localhost:4000/parallel_computing/notes_summary/"}</script>
+{"description":"A personal blog about CS stuff","@type":"WebPage","url":"http://localhost:4000/parallel_computing/notes_summary/","headline":"Gregor, The Coding Cat","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -69,11 +70,10 @@ two orders of magnitude compared with its cached counterpart Shared memory, and 
 <p>All cudaMemcpys basically store data into this block of memory, and as you recall, you define pointers in
 host code to deal with the cuda calls to handle this memory.</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="kt">float</span><span class="o">*</span> <span class="n">d_vec</span><span class="p">;</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kt">float</span><span class="o">*</span> <span class="n">d_vec</span><span class="p">;</span>
     <span class="n">cudaMalloc</span><span class="p">(</span> <span class="p">(</span> <span class="kt">void</span><span class="o">**</span> <span class="p">)</span><span class="o">&amp;</span><span class="n">d_vec</span><span class="p">,</span> <span class="n">size</span> <span class="p">);</span>
     <span class="n">cudaMemcpy</span><span class="p">(</span> <span class="n">d_vec</span><span class="p">,</span> <span class="n">someHostData</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">cudaMemcpyHostToDevice</span> <span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>It’s usually when dealing with this memory that we have the issue of potentially dereferencing the pointers
 created for the global memory allocated in GPU in host code. 
@@ -92,15 +92,13 @@ device you will see that you have just some dozens of KBs available for each SM.
 
 <p>To work with this kind of memory, we declare it inside device code, as opposed to global memory, which is declared and reserved in host code.</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">__shared__</span> <span class="kt">float</span> <span class="n">sh_foo</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
-</code></pre>
-</div>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">__shared__</span> <span class="kt">float</span> <span class="n">sh_foo</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+</code></pre></div></div>
 
 <p>The amount of memory has to be know at compile time if declared in this way. It could be dynamic if we pass the amount of memory in the kernel call.</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">fooKernel</span><span class="o">&lt;&lt;&lt;</span> <span class="n">grid</span><span class="p">,</span> <span class="n">block</span><span class="p">,</span> <span class="n">sizeOfSharedMemory</span> <span class="o">&gt;&gt;&gt;</span><span class="p">(</span> <span class="n">args</span> <span class="p">)</span>
-</code></pre>
-</div>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">fooKernel</span><span class="o">&lt;&lt;&lt;</span> <span class="n">grid</span><span class="p">,</span> <span class="n">block</span><span class="p">,</span> <span class="n">sizeOfSharedMemory</span> <span class="o">&gt;&gt;&gt;</span><span class="p">(</span> <span class="n">args</span> <span class="p">)</span>
+</code></pre></div></div>
 
 <p>In this context we have to deal with synchronization calls, like __syncthreads(), which need to be called in order for the threads in a block to
 synchronize its execution ( wait till all have reached that section ).</p>
@@ -118,9 +116,8 @@ by using a single read and then a broadcast, reducing the memory transfers by a 
 
 <p>To define a region as constant we declare like this</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">__constant__</span> <span class="kt">float</span> <span class="n">foo</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
-</code></pre>
-</div>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">__constant__</span> <span class="kt">float</span> <span class="n">foo</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
+</code></pre></div></div>
 
 <p>To actually fill this region, we use <em>cudaMemcpyToSymbol</em> instead of a normal <em>cudaMemcpy</em>.</p>
 
@@ -132,15 +129,13 @@ texture memory are the ones that do computation in regions close to each other i
 
 <p>To create and use it we have to first define a texture object</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">texture</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">myTexture</span><span class="p">;</span>
-</code></pre>
-</div>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">texture</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">myTexture</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>Then bind it to a region already allocated with cudaMalloc</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">cudaBindTexture</span><span class="p">(</span> <span class="p">...</span> <span class="p">);</span>
-</code></pre>
-</div>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">cudaBindTexture</span><span class="p">(</span> <span class="p">...</span> <span class="p">);</span>
+</code></pre></div></div>
 
 <p>And then we can use it in our kernel code by using tex2Dfetch or tex1Dfetch, according to the dimension of our texture.</p>
 

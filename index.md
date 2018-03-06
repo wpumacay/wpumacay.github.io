@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# [](#header-1)Meow, World!!!
+# [](#header-1)Hello, World!!!
 
-Meow, hope you find something helpfull in this blog. So far, check the notes I wrote while studying for my parallel computing final exam. Check it out [here]({{site.baseurl}}/cs_stuff)
+Hey there. I hope you find something helpfull in this blog. I've just started it, so please, don't expect too much from it yet :(, as I haven't documented some of my github repos yet. In the meantime, check some of the [projects]({{site.baseurl}}/projects/) I've been working on.
 

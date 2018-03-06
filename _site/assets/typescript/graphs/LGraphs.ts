@@ -616,7 +616,7 @@ class LGraph
 
 	// single source shortest paths
 
-	public
+	public dijkstra
 }
 
 
