@@ -10,6 +10,8 @@ layout: projects
 
 ## [Slides](https://docs.google.com/presentation/d/1wKyg93QdSV0P1rhHNrzce4k-tN6eSdjNL9-i4KI2lxI/edit?usp=sharing)
 
+## [Code](https://github.com/wpumacay/computer_graphics_finalproject)
+
 ## Intro
 
 This project focuses in the implementation from the ground-up of a simulation engine, based on the work done by [Michiel van de Panne](https://www.cs.ubc.ca/~van/) and its group at the University of British Columbia; in specific, the project [**Terrain-Adaptive Locomotion Skills Using Deep Reinforcement Learning**](https://xbpeng.github.io/projects/DeepTerrainRL/index.html), by [Xue Bin Peng](https://xbpeng.github.io/).
