@@ -119,3 +119,26 @@ We are working on integrating the more general Heightfield collision shape of Bu
 
 ![Gif_entity_component_system]({{site.url}}/assets/images/projects/gif_cg_terrain.gif)
 <center><b><i>Terrain Generation</i></b></center>
+
+### Motion and controllers
+
+The structure of the simulated character can be described by a tree. This structure is stored in a [**json**](https://github.com/wpumacay/computer_graphics_finalproject/blob/master/res/deepTerrainData/characters/raptor.json) file, which describes the joints as well as the bodies definitions to create the simulated character.
+
+We made a parser for these type of structures ( we changed the [jsoncpp](https://github.com/open-source-parsers/jsoncpp) for [Json for Modern C++](https://github.com/nlohmann/json) for integration issues ) and a tree with this data stored in each node.
+
+![Img_character_tree]({{site.url}}/assets/images/projects/img_cg_character_tree.png)
+<center><b><i>Character Tree</i></b></center>
+
+We then make the motion and physics components that these character should have. The motion component allows us to test the tree structure of the character, by allowing us to play a sequence of poses into the character.
+
+![Gif_character_motion]({{site.url}}/assets/images/projects/gif_cg_character_motion.gif)
+<center><b><i>Character Motion</i></b></center>
+
+![Gif_character_ragdoll]({{site.url}}/assets/images/projects/gif_cg_character_ragdoll.gif)
+<center><b><i>Character Ragdoll</i></b></center>
+
+We are working on fixing some issues with joints positions and the world scale, as you can see in the offset that the bodies have.
+
+### Remaining integration
+
+As described in earlier sections, the remaining part of the integration is related to terrain generation ( using heightfield collision shapes ) and integration with the authors' controllers. The later is the most tricky as there are several modules that have to be understood and integrated. We have the character entity that can receive the torques, so, this would be the missing part to make the character walk as described in the paper. We hope to integrate this part soon in next iterations of the project.
