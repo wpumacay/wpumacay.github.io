@@ -2,9 +2,11 @@
 layout: projects
 ---
 
-# Design and Implementation of a simulation engine for research in locomotion.
+# Case study: Terrain-Adaptive Locomotion Skills Using Deep Reinforcement Learning
 
-![Intro]({{site.url}}/assets/images/projects/img_cg_scene_entities.png)
+<!-- ![Intro]({{site.url}}/assets/images/projects/img_cg_scene_entities.png) -->
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PjCnE6suZME" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Intro
 
@@ -25,7 +27,7 @@ As described earlier, we based our project on the **Terrain-Adaptive Locomotion 
 
 Below you can see the demo provided by the authors.
 
-#### Image here!!!!
+![ReferenceProject]({{site.url}}/assets/images/projects/gif_reference_project.gif)
 
 ## Design Architecture 
 
