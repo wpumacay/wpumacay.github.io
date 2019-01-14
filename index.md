@@ -40,8 +40,6 @@ me an e-mail to wilsanph@gmail.com.
 
 *   [**leojs**](https://github.com/wpumacay/leoJS): A sandbox to play around with the DH-representation, FK and IK.
 
-*   [**felix**](https://github.com/wpumacay/cs_computer_vision): A basic image processing library with support for CUDA.
-
 *   [**Rover Project**](https://github.com/wpumacay/RoboND-Rover-Project): The rover project from my first-term of the RoboND from Udacity.
     
     ![RoboND-Rover]({{site.baseurl}}/assets/images/gif_projects_robond_rover.gif)
