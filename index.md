@@ -8,6 +8,10 @@ layout: default
 [gif-tysocMjc-2]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_2.gif
 [gif-tysocMjc-3]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_3.gif
 
+[gif-leojs-1]: {{site.baseurl}}/assets/images/gif_projects_leojs_1.gif
+[gif-leojs-2]: {{site.baseurl}}/assets/images/gif_projects_leojs_2.gif
+[gif-leojs-3]: {{site.baseurl}}/assets/images/gif_projects_leojs_3.gif
+
 ## About me
 
 Hi!!!, I'm Wilbert Pumacay. I'm a 2nd year Msc. student at _Universidad Católica San Pablo
@@ -36,9 +40,17 @@ me an e-mail to wilsanph@gmail.com.
 
 *   [**cat1**](https://github.com/wpumacay/cat1): A basic rendering engine based in C++ and OpenGL.
 
-*   [**cat1js**](https://github.com/wpumacay/cat1js): A port of my rendering engine to typescript and WebGL.
+    ![cat1-sample-terrain]({{site.baseurl}}/assets/images/gif_projects_cat1.gif)
+
+*   [**cat1js**](https://github.com/wpumacay/cat1js): A port of my rendering engine to typescript and WebGL. 
+                                                      A sample app can be found [here](https://wpumacay.github.io/leoJS/index.html)
+
+    ![cat1js-sample-leo]({{site.baseurl}}/assets/images/gif_projects_cat1js.gif)
 
 *   [**leojs**](https://github.com/wpumacay/leoJS): A sandbox to play around with the DH-representation, FK and IK.
+                                                    The app can be found [here](https://wpumacay.github.io/leoJS/playground.html)
+
+    ![leojs-1][gif-leojs-1] ![leojs-3][gif-leojs-3]
 
 *   [**Rover Project**](https://github.com/wpumacay/RoboND-Rover-Project): The rover project from my first-term of the RoboND from Udacity.
     
