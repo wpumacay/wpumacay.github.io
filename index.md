@@ -30,7 +30,7 @@ working with microcontrollers and making interfaces for sensors and actuators ne
 for some robotics projects.
 
 If you have any questions or if you'd like to get in touch, don't hesitate and send
-me an e-mail to wilsanph@gmail.com.
+me an e-mail to wilbert.pumacay@ucsp.edu.pe.
 
 ## Projects
 
