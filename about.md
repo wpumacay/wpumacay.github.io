@@ -8,6 +8,13 @@ layout: default
 [gif-tysocMjc-2]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_2.gif
 [gif-tysocMjc-3]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_3.gif
 
+[gif-deeprl-projects-1-1]: {{site.baseurl}}/assets/images/gif_projects_dqn_1.gif
+[gif-deeprl-projects-1-2]: {{site.baseurl}}/assets/images/gif_projects_dqn_2.gif
+
+[gif-leojs-1]: {{site.baseurl}}/assets/images/gif_projects_leojs_1.gif
+[gif-leojs-2]: {{site.baseurl}}/assets/images/gif_projects_leojs_2.gif
+[gif-leojs-3]: {{site.baseurl}}/assets/images/gif_projects_leojs_3.gif
+
 ## About me
 
 Hi!!!, I'm Wilbert Pumacay. I'm a 2nd year Msc. student at _Universidad Católica San Pablo
@@ -34,13 +41,25 @@ me an e-mail to wilbert.pumacay@ucsp.edu.pe.
 
     ![tysocMjc-1][gif-tysocMjc-1] ![tysocMjc-1][gif-tysocMjc-2] ![tysocMjc-1][gif-tysocMjc-3]
 
-*   [**cat1**](https://github.com/wpumacay/cat1): A rendering engine based in C++ and OpenGL.
+*   [**DeeprlND-projects**](https://github.com/wpumacay/DeeprlND-projects): Project implementations for the DeepRL Nanodegree by Udacity.
 
-*   [**cat1js**](https://github.com/wpumacay/cat1js): A port of my rendering engine to typescript and WebGL.
+    * [Project 1](https://github.com/wpumacay/DeeprlND-projects/tree/master/project1-navigation): Deep Q-learning
+
+    ![deeprlnd-projects-1-1][gif-deeprl-projects-1-1] ![deeprlnd-projects-1-2][gif-deeprl-projects-1-2]
+
+*   [**cat1**](https://github.com/wpumacay/cat1): A basic rendering engine based in C++ and OpenGL.
+
+    ![cat1-sample-terrain]({{site.baseurl}}/assets/images/gif_projects_cat1.gif)
+
+*   [**cat1js**](https://github.com/wpumacay/cat1js): A port of my rendering engine to typescript and WebGL. 
+                                                      A sample app can be found [here](https://wpumacay.github.io/leoJS/index.html)
+
+    ![cat1js-sample-leo]({{site.baseurl}}/assets/images/gif_projects_cat1js.gif)
 
 *   [**leojs**](https://github.com/wpumacay/leoJS): A sandbox to play around with the DH-representation, FK and IK.
+                                                    The app can be found [here](https://wpumacay.github.io/leoJS/playground.html)
 
-*   [**felix**](https://github.com/wpumacay/cs_computer_vision): A basic image processing library with support for CUDA.
+    ![leojs-1][gif-leojs-1] ![leojs-3][gif-leojs-3]
 
 *   [**Rover Project**](https://github.com/wpumacay/RoboND-Rover-Project): The rover project from my first-term of the RoboND from Udacity.
     
