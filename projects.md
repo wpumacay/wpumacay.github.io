@@ -11,6 +11,11 @@ layout: default
 [gif-deeprl-projects-1-1]: {{site.baseurl}}/assets/images/gif_projects_dqn_1.gif
 [gif-deeprl-projects-1-2]: {{site.baseurl}}/assets/images/gif_projects_dqn_2.gif
 
+[gif-deeprl-projects-2-1]: {{site.baseurl}}/assets/images/gif_projects_ddpg_1.gif
+[gif-deeprl-projects-2-2]: {{site.baseurl}}/assets/images/gif_projects_ddpg_2.gif
+
+[gif-deeprl-projects-3-1]: {{site.baseurl}}/assets/images/gif_projects_maddpg_1.gif
+
 [gif-leojs-1]: {{site.baseurl}}/assets/images/gif_projects_leojs_1.gif
 [gif-leojs-2]: {{site.baseurl}}/assets/images/gif_projects_leojs_2.gif
 [gif-leojs-3]: {{site.baseurl}}/assets/images/gif_projects_leojs_3.gif
@@ -27,6 +32,14 @@ layout: default
 
     ![deeprlnd-projects-1-1][gif-deeprl-projects-1-1] ![deeprlnd-projects-1-2][gif-deeprl-projects-1-2]
 
+    * [Project 2](https://github.com/wpumacay/DeeprlND-projects/tree/master/project2-continuous-control): Deep Deterministic Policy Gradients (DDPG)
+
+    ![deeprlnd-projects-2-1][gif-deeprl-projects-2-1] ![deeprlnd-projects-2-2][gif-deeprl-projects-2-2]
+
+    * [Project 3](https://github.com/wpumacay/DeeprlND-projects/tree/master/project3-collaboration): Multi-Agent DDPG
+
+    ![deeprlnd-projects-3-1][gif-deeprl-projects-3-1]
+    
 *   [**cat1**](https://github.com/wpumacay/cat1): A basic rendering engine based in C++ and OpenGL.
 
     ![cat1-sample-terrain]({{site.baseurl}}/assets/images/gif_projects_cat1.gif)
