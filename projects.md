@@ -4,9 +4,13 @@ layout: default
 
 [//]: # (Image References)
 
+[gif-loco-1]: https://media.giphy.com/media/u48REyy0BzCUzbLyXC/giphy.gif
+[gif-loco-2]: https://media.giphy.com/media/ZDEAQSUraLao0fOhHi/giphy.gif
 [gif-tysocMjc-1]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_1.gif
 [gif-tysocMjc-2]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_2.gif
 [gif-tysocMjc-3]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_3.gif
+
+[gif-tiny-renderer-1]: https://media.giphy.com/media/SqrtZMytk0O0FnDtex/giphy.gif
 
 [gif-deeprl-projects-1-1]: {{site.baseurl}}/assets/images/gif_projects_dqn_1.gif
 [gif-deeprl-projects-1-2]: {{site.baseurl}}/assets/images/gif_projects_dqn_2.gif
@@ -22,9 +26,9 @@ layout: default
 
 ## Projects
 
-*   [**tysoc**](https://github.com/wpumacay/tysocMjc): A robotics locomotion framework for DeepRL research.
+*   [**Loco**](https://github.com/wpumacay/loco): A robotics locomotion framework for DeepRL research.
 
-    ![tysocMjc-1][gif-tysocMjc-1] ![tysocMjc-1][gif-tysocMjc-2] ![tysocMjc-1][gif-tysocMjc-3]
+    ![loco-1][gif-loco-1] ![loco-2][gif-loco-2]
 
 *   [**DeeprlND-projects**](https://github.com/wpumacay/DeeprlND-projects): Project implementations for the DeepRL Nanodegree by Udacity.
 
@@ -39,13 +43,13 @@ layout: default
     * [Project 3](https://github.com/wpumacay/DeeprlND-projects/tree/master/project3-collaboration): Multi-Agent DDPG
 
     ![deeprlnd-projects-3-1][gif-deeprl-projects-3-1]
-    
-*   [**cat1**](https://github.com/wpumacay/cat1): A basic rendering engine based in C++ and OpenGL.
 
-    ![cat1-sample-terrain]({{site.baseurl}}/assets/images/gif_projects_cat1.gif)
+*   [**TinyRenderer**](https://github.com/wpumacay/cat1): A basic rendering engine based in C++ and OpenGL.
 
-*   [**cat1js**](https://github.com/wpumacay/cat1js): A port of my rendering engine to typescript and WebGL. 
-                                                      A sample app can be found [here](https://wpumacay.github.io/leoJS/index.html)
+    ![tiny-renderer-1][gif-tiny-renderer-1]
+
+*   [**TinyRendererJs**](https://github.com/wpumacay/cat1js): A port of my rendering engine to typescript and WebGL. 
+                                                              A sample app can be found [here](https://wpumacay.github.io/leoJS/index.html)
 
     ![cat1js-sample-leo]({{site.baseurl}}/assets/images/gif_projects_cat1js.gif)
 
