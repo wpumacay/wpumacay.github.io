@@ -6,6 +6,13 @@ $body-foreground: $gallery !default;
 $header: $conifer !default;
 $blockquote-color: $silver-chalice !default;
 $blockquote-border: $dove-grey !default;
+$container-max-width: 1000px;
+
+@mixin media-max-width($max-width) {
+  @media (max-width: $max-width) {
+      @content;
+  }
+}
 
 body {
   margin: 0;
@@ -20,8 +27,8 @@ body {
 /* General & 'Reset' Stuff */
 
 .container {
-  width: 100%;
-  max-width: 1000px;
+  width: 90%;
+  max-width: $container-max-width;
   margin: 0 auto;
 }
 
@@ -64,7 +71,11 @@ header h1 {
                0 0 10px rgba(181, 232, 83, 0.1);
   letter-spacing: -1px;
   -webkit-font-smoothing: antialiased;
+  @include media-max-width($container-max-width) {
+    margin-left: 0;
+  }
 }
+
 
 header h1:before {
   content: "./ ";
@@ -252,33 +263,6 @@ a {
   zoom:1;
 }
 
-
-/*
-  Some extra functionality
-*/
-
-
-/**
- * Site footer
- */
-.site-footer {
-  border-top: 1px dashed $conifer; //header;
-  padding: 30px 0px;
-  width: 90%
+#a-title {
+  text-decoration: none;
 }
-
-
-/**
- * Icons for footer
- */
-.site-icon-footer 
-{
-    > svg 
-    {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        vertical-align: middle;
-    }
-}
-

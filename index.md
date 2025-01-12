@@ -2,47 +2,55 @@
 layout: default
 ---
 
-[//]: # (Image References)
-
-[gif-loco-1]: https://media.giphy.com/media/u48REyy0BzCUzbLyXC/giphy.gif
-[gif-loco-2]: https://media.giphy.com/media/ZDEAQSUraLao0fOhHi/giphy.gif
-[gif-tysocMjc-1]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_1.gif
-[gif-tysocMjc-2]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_2.gif
-[gif-tysocMjc-3]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_3.gif
-
-[gif-tiny-renderer-1]: https://media.giphy.com/media/SqrtZMytk0O0FnDtex/giphy.gif
-
-[gif-deeprl-projects-1-1]: {{site.baseurl}}/assets/images/gif_projects_dqn_1.gif
-[gif-deeprl-projects-1-2]: {{site.baseurl}}/assets/images/gif_projects_dqn_2.gif
-
-[gif-deeprl-projects-2-1]: {{site.baseurl}}/assets/images/gif_projects_ddpg_1.gif
-[gif-deeprl-projects-2-2]: {{site.baseurl}}/assets/images/gif_projects_ddpg_2.gif
-
-[gif-deeprl-projects-3-1]: {{site.baseurl}}/assets/images/gif_projects_maddpg_1.gif
-
-[gif-leojs-1]: {{site.baseurl}}/assets/images/gif_projects_leojs_1.gif
-[gif-leojs-2]: {{site.baseurl}}/assets/images/gif_projects_leojs_2.gif
-[gif-leojs-3]: {{site.baseurl}}/assets/images/gif_projects_leojs_3.gif
-
 ## About me
 
-Hi!!!, I'm Wilbert Pumacay. I'm a 2nd year Msc. student at _Universidad Católica San Pablo
-(Arequipa-Peru)_, pursuing a degree in Computer Science, and I received my
-Bsc. degree in Mechatronics from _Universidad Nacional de Ingenieria (Lima-Peru)_. 
+I'm a last year MSc. student in Computer Science at [**Universidad Católica San Pablo**][ucsp-website]
+, working on Reinforcement Learning for Robotics. I received my BEng. degree in
+Mechatronics from [**Universidad Nacional de Ingenieria**][uni-website] where I
+worked as a Research Assistant on a mobile robotic platform, mostly developing
+drivers for sensors and actuators.
 
-My interests lie in the intersection between Robotics and Machine Learning. I'm currently
-working on a framework to test some ideas about robot locomotion and Deep Reinforcement
-Learning (link [here](https://github.com/wpumacay/tysocMjc)), which is part of my Msc. thesis.
+## Publications
 
-I spent three years working as a game programmer (before I joined the Msc. program)
-at a peruvian game studio called **Bamtang Games**. There I got into programming and
-computer science (thanks guys!). I also spent half a semester working as an assistant
-for some research projects during the last year of my undergraduate studies, mostly
-working with microcontrollers and making interfaces for sensors and actuators needed
-for some robotics projects.
+![img-colosseum][pub-colosseum-image]
 
-If you have any questions or if you'd like to get in touch, don't hesitate and send
-me an e-mail to wilbert.pumacay@ucsp.edu.pe.
+- **Colosseum**: A Benchmark for Evaluating Generalization for Robotic Manipulation
+
+    _Authors: **Wilbert Pumacay**, Ishika Singh, Jiafei Duan, Ranjay Krishna, Jesse Thomason, Dieter Fox_
+
+    [**Website**][pub-colosseum-website] - [**Paper**][pub-colosseum-arxiv] - [**Code**][pub-colosseum-code]
+
+<br>
+
+![img-failgen-aha][pub-failgen-image]
+
+- **AHA**: A Vision-Language-Model for Detecting and Reasoning over Failures in Robotic Manipulation
+
+    _Authors: Jiafei Duan, **Wilbert Pumacay**, Nishanth Kumar, Yi Ru Wang, Shulin Tian, Wentao Yuan, Ranjay Krishna, Dieter Fox, Ajay Mandlekar, Yijie Guo_
+
+    [**Website**][pub-failgen-website] - [**Paper**][pub-failgen-arxiv]
+
+<br>
+
+![img-manip-any][pub-manip-any-image]
+
+- **Manipulate Anything**: Automating Real-World Robots using Vision-Language Models
+
+    _Authors:  Jiafei Duan, Wentao Yuan, **Wilbert Pumacay**, Yi Ru Wang, Kiana Ehsani, Dieter Fox, Ranjay Krishna_
+
+    [**Website**][pub-manip-any-website] - [**Paper**][pub-manip-any-arxiv] - [**Code**][pub-manip-any-code]
+
+<br>
+
+![img-robopoint][pub-robopoint-image]
+
+- **RoboPoint**: A Vision-Language Model for Spatial Affordance Prediction for Robotics
+
+    _Authors: Wentao Yuan, Jiafei Duan, Valts Blukis, **Wilbert Pumacay**, Ranjay Krishna, Adithyavairavan Murali, Arsalan Mousavian, Dieter Fox_
+
+    [**Website**][pub-robopoint-website] - [**Paper**][pub-robopoint-arxiv] - [**Code**][pub-robopoint-code]
+
+<br>
 
 ## Projects
 
@@ -94,3 +102,48 @@ me an e-mail to wilbert.pumacay@ucsp.edu.pe.
 
     ![RoboND-Rover]({{site.baseurl}}/assets/images/gif_projects_robond_follow_me.gif)
 
+
+
+--------------------------------------------------------------------------------
+
+[ucsp-website]: https://cs.ucsp.edu.pe/investigacion/
+[uni-website]: https://portal.uni.edu.pe/
+
+[pub-colosseum-image]: {{site.baseurl}}/assets/images/gif_perturbation_factors.gif
+[pub-colosseum-website]: https://robot-colosseum.github.io/
+[pub-colosseum-arxiv]: https://arxiv.org/abs/2402.08191
+[pub-colosseum-code]: https://github.com/robot-colosseum/robot-colosseum
+
+[pub-failgen-image]: {{site.baseurl}}/assets/images/gif_failgen_aha.gif
+[pub-failgen-website]: https://aha-vlm.github.io
+[pub-failgen-arxiv]: https://aha-vlm.github.io/Aha_paper.pdf
+
+[pub-manip-any-image]: {{site.baseurl}}/assets/images/gif_manipulate_anything.gif
+[pub-manip-any-website]: https://robot-ma.github.io/
+[pub-manip-any-arxiv]: https://arxiv.org/pdf/2406.18915
+[pub-manip-any-code]: https://github.com/Robot-MA/manipulate-anything
+
+[pub-robopoint-image]: {{site.baseurl}}/assets/images/gif_robopoint.gif
+[pub-robopoint-website]: https://robo-point.github.io/
+[pub-robopoint-arxiv]: https://arxiv.org/pdf/2406.10721
+[pub-robopoint-code]: https://github.com/wentaoyuan/RoboPoint
+
+[gif-loco-1]: https://media.giphy.com/media/u48REyy0BzCUzbLyXC/giphy.gif
+[gif-loco-2]: https://media.giphy.com/media/ZDEAQSUraLao0fOhHi/giphy.gif
+[gif-tysocMjc-1]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_1.gif
+[gif-tysocMjc-2]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_2.gif
+[gif-tysocMjc-3]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_3.gif
+
+[gif-tiny-renderer-1]: https://media.giphy.com/media/SqrtZMytk0O0FnDtex/giphy.gif
+
+[gif-deeprl-projects-1-1]: {{site.baseurl}}/assets/images/gif_projects_dqn_1.gif
+[gif-deeprl-projects-1-2]: {{site.baseurl}}/assets/images/gif_projects_dqn_2.gif
+
+[gif-deeprl-projects-2-1]: {{site.baseurl}}/assets/images/gif_projects_ddpg_1.gif
+[gif-deeprl-projects-2-2]: {{site.baseurl}}/assets/images/gif_projects_ddpg_2.gif
+
+[gif-deeprl-projects-3-1]: {{site.baseurl}}/assets/images/gif_projects_maddpg_1.gif
+
+[gif-leojs-1]: {{site.baseurl}}/assets/images/gif_projects_leojs_1.gif
+[gif-leojs-2]: {{site.baseurl}}/assets/images/gif_projects_leojs_2.gif
+[gif-leojs-3]: {{site.baseurl}}/assets/images/gif_projects_leojs_3.gif

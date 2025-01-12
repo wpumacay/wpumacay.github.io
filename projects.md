@@ -2,28 +2,6 @@
 layout: default
 ---
 
-[//]: # (Image References)
-
-[gif-loco-1]: https://media.giphy.com/media/u48REyy0BzCUzbLyXC/giphy.gif
-[gif-loco-2]: https://media.giphy.com/media/ZDEAQSUraLao0fOhHi/giphy.gif
-[gif-tysocMjc-1]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_1.gif
-[gif-tysocMjc-2]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_2.gif
-[gif-tysocMjc-3]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_3.gif
-
-[gif-tiny-renderer-1]: https://media.giphy.com/media/SqrtZMytk0O0FnDtex/giphy.gif
-
-[gif-deeprl-projects-1-1]: {{site.baseurl}}/assets/images/gif_projects_dqn_1.gif
-[gif-deeprl-projects-1-2]: {{site.baseurl}}/assets/images/gif_projects_dqn_2.gif
-
-[gif-deeprl-projects-2-1]: {{site.baseurl}}/assets/images/gif_projects_ddpg_1.gif
-[gif-deeprl-projects-2-2]: {{site.baseurl}}/assets/images/gif_projects_ddpg_2.gif
-
-[gif-deeprl-projects-3-1]: {{site.baseurl}}/assets/images/gif_projects_maddpg_1.gif
-
-[gif-leojs-1]: {{site.baseurl}}/assets/images/gif_projects_leojs_1.gif
-[gif-leojs-2]: {{site.baseurl}}/assets/images/gif_projects_leojs_2.gif
-[gif-leojs-3]: {{site.baseurl}}/assets/images/gif_projects_leojs_3.gif
-
 ## Projects
 
 *   [**Loco**](https://github.com/wpumacay/loco): A robotics locomotion framework for DeepRL research.
@@ -74,3 +52,24 @@ layout: default
 
     ![RoboND-Rover]({{site.baseurl}}/assets/images/gif_projects_robond_follow_me.gif)
 
+------------------------------------------------------
+
+[gif-loco-1]: https://media.giphy.com/media/u48REyy0BzCUzbLyXC/giphy.gif
+[gif-loco-2]: https://media.giphy.com/media/ZDEAQSUraLao0fOhHi/giphy.gif
+[gif-tysocMjc-1]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_1.gif
+[gif-tysocMjc-2]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_2.gif
+[gif-tysocMjc-3]: {{site.baseurl}}/assets/images/gif_projects_tysocMjc_3.gif
+
+[gif-tiny-renderer-1]: https://media.giphy.com/media/SqrtZMytk0O0FnDtex/giphy.gif
+
+[gif-deeprl-projects-1-1]: {{site.baseurl}}/assets/images/gif_projects_dqn_1.gif
+[gif-deeprl-projects-1-2]: {{site.baseurl}}/assets/images/gif_projects_dqn_2.gif
+
+[gif-deeprl-projects-2-1]: {{site.baseurl}}/assets/images/gif_projects_ddpg_1.gif
+[gif-deeprl-projects-2-2]: {{site.baseurl}}/assets/images/gif_projects_ddpg_2.gif
+
+[gif-deeprl-projects-3-1]: {{site.baseurl}}/assets/images/gif_projects_maddpg_1.gif
+
+[gif-leojs-1]: {{site.baseurl}}/assets/images/gif_projects_leojs_1.gif
+[gif-leojs-2]: {{site.baseurl}}/assets/images/gif_projects_leojs_2.gif
+[gif-leojs-3]: {{site.baseurl}}/assets/images/gif_projects_leojs_3.gif

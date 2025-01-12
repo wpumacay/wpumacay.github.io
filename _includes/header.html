@@ -1,20 +1,18 @@
 <header>
     <div class="container">
-        <h1>{{ site.title | default: site.github.repository_name }}</h1>
+        <a id="a-title" href="{{ '/' | relative_url }}">
+            <h1>{{ site.title | default: site.github.repository_name }}</h1>
+        </a>
         <h2>{{ site.description | default: site.github.project_tagline }}</h2>
     </div>
 
     <div class="container">
         <a href="{{ site.baseurl }}/index.html">Home</a>
         <span>/</span>
+        <a href="{{ site.baseurl }}/publications.html">Publications</a>
+        <span>/</span>
         <a href="{{ site.baseurl }}/projects.html">Projects</a>
         <span>/</span>
         <a href="https://wpumacay.github.io/research_blog/">Blog</a>
-        <span>/</span>
-        <a href="{{ site.baseurl }}/about.html">About me</a>
-        <span>/</span>
-        <a href="https://raw.githubusercontent.com/wpumacay/wpumacay.github.io/master/documents/Pumacay_Wilbert.pdf">Resume</a>
     </div>
-
-
 </header>
